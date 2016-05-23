@@ -535,6 +535,55 @@ describe("/processor.js", function() {
             });
         });
         
+        it("should support @inherit rules & composes: <x> from super", function() {
+            var processor = this.processor;
+            
+            return processor.file("./test/specimens/inheritance.css").then(function(result) {
+                var child  = result.files[path.resolve("./test/specimens/inheritance.css")],
+                    parent = result.files[path.resolve("./test/specimens/super.css")];
+                
+                assert.deepEqual(parent.exports.untouched, child.exports.untouched);
+                assert.notDeepEqual(parent.exports.extend, child.exports.extend);
+                assert.notDeepEqual(parent.exports.override, child.exports.override);
+                
+                assert.deepEqual(child.exports, {
+                    composeInternal : [ "mcfb7d03a3_override", "mcfb7d03a3_composeInternal" ],
+                    composeExternal : [ "mc08e91a5b_wooga", "mcfb7d03a3_composeExternal" ],
+                    extend          : [ "mc112bd280_extend", "mcfb7d03a3_extend" ],
+                    override        : [ "mcfb7d03a3_override" ],
+                    untouched       : [ "mc112bd280_untouched" ]
+                });
+                
+                return processor.output();
+            })
+            .then(function(output) {
+                compare.stringToFile(
+                    output.css,
+                    "./test/results/processor/inheritance.css"
+                );
+                
+                assert.deepEqual(output.compositions, {
+                    "test/specimens/simple.css" : {
+                        wooga : "mc08e91a5b_wooga"
+                    },
+                    
+                    "test/specimens/inheritance.css" : {
+                        composeExternal : "mc08e91a5b_wooga mcfb7d03a3_composeExternal",
+                        composeInternal : "mcfb7d03a3_override mcfb7d03a3_composeInternal",
+                        extend          : "mc112bd280_extend mcfb7d03a3_extend",
+                        override        : "mcfb7d03a3_override",
+                        untouched       : "mc112bd280_untouched"
+                    },
+                    
+                    "test/specimens/super.css" : {
+                        extend    : "mc112bd280_extend",
+                        override  : "mc112bd280_override",
+                        untouched : "mc112bd280_untouched"
+                    }
+                });
+            });
+        });
+        
         describe("bad imports", function() {
             var invalid = "Unable to locate \"../local.css\" from \"" + path.resolve("invalid") + "\"";
             

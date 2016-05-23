@@ -1,0 +1,21 @@
+/* test/specimens/simple.css */
+.mc08e91a5b_wooga {
+    color: red
+}
+/* test/specimens/super.css */
+.mc112bd280_override {
+    color: red
+}
+.mc112bd280_extend {
+    color: red
+}
+.mc112bd280_untouched {
+    color: red
+}
+/* test/specimens/inheritance.css */
+.mcfb7d03a3_override {
+    color: blue
+}
+.mcfb7d03a3_extend {
+    color: blue
+}

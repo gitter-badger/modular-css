@@ -1,0 +1,19 @@
+@inherit "./super.css";
+
+.override {
+    color: blue;
+}
+
+.extend {
+    composes: extend from super;
+    
+    color: blue;
+}
+
+.composeExternal {
+    composes: wooga from "./simple.css";
+}
+
+.composeInternal {
+    composes: override;
+}

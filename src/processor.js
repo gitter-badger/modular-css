@@ -42,6 +42,7 @@ function Processor(opts) {
     this._process = postcss([
         require("./plugins/values-composed.js"),
         require("./plugins/scoping.js"),
+        require("./plugins/inheritance.js"),
         require("./plugins/composition.js"),
         require("./plugins/keyframes.js")
     ]);
