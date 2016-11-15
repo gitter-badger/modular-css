@@ -10,7 +10,7 @@
   "bin": "./bin/cli.js",
   "scripts": {
     "test": "npm run lint && npm run tests",
-    "tests": "mocha",
+    "tests": "jest",
     "cover": "istanbul cover --print both ./node_modules/mocha/bin/_mocha",
     "lint": "eslint .",
     "parser": "pegjs -o ./src/parsers/parser.js ./src/parsers/parser.pegjs",
@@ -38,7 +38,7 @@
     "factor-bundle": "^2.5.0",
     "from2-string": "^1.1.0",
     "istanbul": "^0.4.2",
-    "mocha": "^3.0.0",
+    "jest": "^17.0.2",
     "pegjs": "^0.10.0",
     "postcss-color-rebeccapurple": "^2.0.0",
     "publish-please": "^2.1.4",

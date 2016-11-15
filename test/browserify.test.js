@@ -17,7 +17,7 @@ var fs     = require("fs"),
 
 describe("/browserify.js", function() {
     describe("basic functionality", function() {
-        after(function(done) {
+        afterAll(function(done) {
             rimraf("./test/output/browserify", done);
         });
         
@@ -194,7 +194,7 @@ describe("/browserify.js", function() {
     });
     
     describe("factor-bundle", function() {
-        after(function(done) {
+        afterAll(function(done) {
             rimraf("./test/output/factor-bundle", done);
         });
         
@@ -370,12 +370,12 @@ describe("/browserify.js", function() {
     });
     
     describe("watchify", function() {
-        after(function(done) {
+        afterAll(function(done) {
             rimraf("./test/output/watchify", done);
         });
         
         describe("caching", function() {
-            after(function() {
+            afterAll(function() {
                 shell.rm("./test/specimens/watchify/caching.css");
             });
 
@@ -418,7 +418,7 @@ describe("/browserify.js", function() {
         });
         
         describe("error handling", function() {
-            after(function() {
+            afterAll(function() {
                 shell.rm("./test/specimens/watchify/errors.css");
             });
         
